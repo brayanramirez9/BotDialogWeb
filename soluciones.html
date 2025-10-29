@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soluciones - BotDialog</title>
+  <meta name="description" content="Descubre todas las características y soluciones que BotDialog ofrece para tu negocio">
+  <link rel="icon" type="image/png" href="images/BotDialog.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient {
+      background: linear-gradient(90deg, #2d7d46 0%, #2360a5 100%);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    .sidebar-item {
+      transition: all 0.3s ease;
+    }
+    .sidebar-item:hover {
+      background-color: #f3f4f6;
+      transform: translateX(4px);
+    }
+    .sidebar-item.active {
+      background-color: #10b981;
+      color: white;
+      font-weight: 600;
+    }
+    .sidebar-item.active:hover {
+      background-color: #059669;
+    }
+    .content-section {
+      display: none;
+      animation: fadeIn 0.5s ease-in;
+    }
+    .content-section.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #header {
+      transition: all 0.3s ease-in-out;
+    }
+    .header-scrolled {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border-bottom: 3px solid;
+      border-image: linear-gradient(90deg, #2d7d46 0%, #2360a5 100%) 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-50" style="font-family: 'Inter', sans-serif;">
+ 
+  <!-- Header -->
+  <nav id="header" class="fixed w-full z-50 top-0 bg-white shadow-md">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2 px-6">
+      <div class="flex items-center">
+        <a href="index.html" class="flex items-center space-x-2">
+          <img src="images/BotDialog.png" alt="BotDialog" class="h-11 w-auto">
+        </a>
+      </div>
+
+      <div class="block lg:hidden">
+        <button id="nav-toggle" class="flex items-center p-1 text-gray-800 hover:text-gray-600 focus:outline-none">
+          <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      
+      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 p-4 lg:p-0" id="nav-content">
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="mr-3">
+            <a class="inline-block py-2 px-4 text-gray-800 font-semibold hover:text-green-600" href="index.html">Inicio</a>
+          </li>
+          <li class="mr-3">
+            <a class="inline-block py-2 px-4 text-gray-800 font-semibold hover:text-green-600 text-green-600 font-bold" href="soluciones.html">Soluciones</a>
+          </li>
+          <li class="mr-3">
+            <a class="inline-block py-2 px-4 text-gray-800 font-semibold hover:text-green-600" href="precios.html">Precios</a>
+          </li>
+        </ul>
+        <a href="#" class="mx-auto lg:mx-0 gradient text-white font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow hover:shadow-xl transition transform hover:scale-105">
+          Prueba Gratis
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Panel principal -->
+  <div class="pt-20 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Soluciones BotDialog
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Descubre todas las características y herramientas que tenemos para optimizar la atención al cliente de tu empresa
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-4 gap-8">
+        
+        <aside class="lg:col-span-1">
+          <div class="bg-white rounded-xl shadow-lg p-4 sticky top-24">
+            <h3 class="text-lg font-bold text-gray-900 mb-4 px-4">Características</h3>
+            <nav class="space-y-2">
+              <button onclick="showContent('whatsapp')" class="sidebar-item active w-full text-left px-4 py-3 rounded-lg flex items-center justify-between" data-section="whatsapp">
+                <span>WhatsApp Business API</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('multicanal')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="multicanal">
+                <span>Chat Multicanal</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('chatbot')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="chatbot">
+                <span>Chatbots y Automatización</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('equipos')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="equipos">
+                <span>Gestión de Equipos</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('bandeja')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="bandeja">
+                <span>Bandeja Unificada</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('reportes')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="reportes">
+                <span>Reportes y Analíticas</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('integraciones')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="integraciones">
+                <span>Integraciones</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('webchat')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="webchat">
+                <span>Web Chat Widget</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('respuestas')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="respuestas">
+                <span>Respuestas Predefinidas</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              
+              <button onclick="showContent('csat')" class="sidebar-item w-full text-left px-4 py-3 rounded-lg flex items-center justify-between text-gray-700" data-section="csat">
+                <span>CSAT y Encuestas</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="lg:col-span-3">
+          
+          <!-- WhatsApp business API -->
+          <div id="whatsapp" class="content-section active bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">WhatsApp Business API Oficial</h2>
+                <p class="text-gray-600">Conecta tu negocio con la plataforma de mensajería más usada del mundo</p>
+              </div>
+            </div>
+
+            <div class="mb-8">
+              <img src="images/chatwoot-panel.png" alt="WhatsApp Business API" class="rounded-xl shadow-lg w-full">
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Mejora tus canales de atención al cliente con WhatsApp Business API de BotDialog, la solución definitiva para negocios en crecimiento. Conecta tu número oficial de WhatsApp Business y gestiona todas tus conversaciones desde una plataforma centralizada.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Características principales:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">API Oficial de WhatsApp</h4>
+                    <p class="text-gray-600">Acceso directo a la API oficial de Meta para WhatsApp Business</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Múltiples agentes</h4>
+                    <p class="text-gray-600">Tu equipo completo puede atender desde la misma cuenta</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Plantillas aprobadas</h4>
+                    <p class="text-gray-600">Envía mensajes proactivos con plantillas pre-aprobadas por WhatsApp</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Mensajes multimedia</h4>
+                    <p class="text-gray-600">Envía imágenes, videos, documentos y ubicaciones</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Verificación oficial</h4>
+                    <p class="text-gray-600">Obtén la marca de verificación verde de WhatsApp Business</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Integración completa</h4>
+                    <p class="text-gray-600">Conecta con tu CRM, ERP y otras herramientas empresariales</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-green-50 border-l-4 border-green-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">¿Por qué elegir WhatsApp Business API?</h4>
+                <p class="text-gray-700">
+                  Con más de 2 mil millones de usuarios activos, WhatsApp es el canal preferido por tus clientes. La API oficial te permite escalar tu atención sin límites, automatizar respuestas y mantener conversaciones personalizadas con cada cliente.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-green-600 text-green-600 px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Chat multicanal -->
+          <div id="multicanal" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Chat Multicanal</h2>
+                <p class="text-gray-600">Todos tus canales de comunicación en un solo lugar</p>
+              </div>
+            </div>
+
+            <div class="mb-8">
+              <img src="images/informes.png" alt="Chat Multicanal" class="rounded-xl shadow-lg w-full">
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Centraliza WhatsApp, Facebook Messenger, Instagram Direct, Telegram, Email, SMS y tu chat web en una única bandeja de entrada. Responde a todos tus clientes sin cambiar de aplicación.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Canales soportados:</h3>
+              
+              <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200">
+                  <div class="flex items-center mb-3">
+                    <svg class="w-8 h-8 text-green-600 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    <h4 class="font-bold text-gray-900">WhatsApp</h4>
+                  </div>
+                  <p class="text-sm text-gray-700">Business API oficial</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200">
+                  <div class="flex items-center mb-3">
+                    <svg class="w-8 h-8 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <h4 class="font-bold text-gray-900">Facebook</h4>
+                  </div>
+                  <p class="text-sm text-gray-700">Messenger integrado</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-xl border border-pink-200">
+                  <div class="flex items-center mb-3">
+                    <svg class="w-8 h-8 text-pink-600 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.421.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+                    </svg>
+                    <h4 class="font-bold text-gray-900">Instagram</h4>
+                  </div>
+                  <p class="text-sm text-gray-700">Direct Messages</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-xl border border-cyan-200">
+                  <div class="flex items-center mb-3">
+                    <svg class="w-8 h-8 text-cyan-600 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                    <h4 class="font-bold text-gray-900">Telegram</h4>
+                  </div>
+                  <p class="text-sm text-gray-700">Bot API completa</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200">
+                  <div class="flex items-center mb-3">
+                    <svg class="w-8 h-8 text-gray-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <h4 class="font-bold text-gray-900">Email</h4>
+                  </div>
+                  <p class="text-sm text-gray-700">IMAP/SMTP integrado</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200">
+                  <div class="flex items-center mb-3">
+                    <svg class="w-8 h-8 text-purple-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <h4 class="font-bold text-gray-900">Web Chat</h4>
+                  </div>
+                  <p class="text-sm text-gray-700">Widget personalizable</p>
+                </div>
+              </div>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Beneficios clave:</h3>
+              
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start">
+                  <svg class="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-700"><strong>Una sola bandeja de entrada:</strong> Visualiza y responde todos los mensajes desde un único panel, sin importar el canal de origen.</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-700"><strong>Contexto completo:</strong> Historial unificado de conversaciones con cada cliente, independientemente del canal usado.</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-700"><strong>Respuestas más rápidas:</strong> Reduce el tiempo de respuesta al tener todo centralizado y accesible.</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-gray-700"><strong>Mejor experiencia del cliente:</strong> Tus clientes eligen su canal preferido y reciben atención consistente.</span>
+                </li>
+              </ul>
+
+              <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Conecta todos tus canales en minutos</h4>
+                <p class="text-gray-700">
+                  No necesitas conocimientos técnicos. Nuestra plataforma te guía paso a paso para conectar cada canal de comunicación. En menos de 30 minutos tendrás todos tus canales funcionando.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Chatbots y Automatización -->
+          <div id="chatbot" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Chatbots y Automatización</h2>
+                <p class="text-gray-600">Automatiza respuestas y libera tiempo de tu equipo</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Crea chatbots inteligentes sin programar. Automatiza respuestas frecuentes, califica leads, agenda citas y mucho más. Nuestro constructor visual te permite diseñar flujos conversacionales complejos en minutos.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Funcionalidades:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Constructor visual</h4>
+                    <p class="text-gray-600">Diseña flujos conversacionales sin código</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">IA conversacional</h4>
+                    <p class="text-gray-600">Respuestas inteligentes basadas en contexto</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Transferencia a humanos</h4>
+                    <p class="text-gray-600">Deriva conversaciones complejas a tu equipo</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Horarios personalizados</h4>
+                    <p class="text-gray-600">Activa bots según horario de atención</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-purple-50 border-l-4 border-purple-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Automatización inteligente</h4>
+                <p class="text-gray-700">
+                  Reduce hasta un 70% las consultas repetitivas y permite que tu equipo se enfoque en casos que realmente requieren atención humana.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Gestión de equipos -->
+          <div id="equipos" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Gestión de Equipos</h2>
+                <p class="text-gray-600">Organiza y supervisa el trabajo de tus agentes</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Administra múltiples agentes, asigna conversaciones automáticamente, define roles y permisos, y monitorea el desempeño de tu equipo en tiempo real.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Características:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Asignación automática</h4>
+                    <p class="text-gray-600">Distribuye conversaciones según disponibilidad</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Roles y permisos</h4>
+                    <p class="text-gray-600">Define qué puede hacer cada miembro</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Supervisión en vivo</h4>
+                    <p class="text-gray-600">Monitorea conversaciones en tiempo real</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Métricas de desempeño</h4>
+                    <p class="text-gray-600">Evalúa productividad y calidad</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Equipos más eficientes</h4>
+                <p class="text-gray-700">
+                  Optimiza la carga de trabajo, identifica oportunidades de mejora y asegura que cada cliente reciba atención de calidad.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-indigo-600 text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Bandeja unificada -->
+          <div id="bandeja" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Bandeja Unificada</h2>
+                <p class="text-gray-600">Todas tus conversaciones en un solo lugar</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Visualiza todas las conversaciones de todos los canales en una bandeja de entrada intuitiva. Filtra, busca, etiqueta y organiza tus chats para nunca perder el hilo.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Funcionalidades:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Vista unificada</h4>
+                    <p class="text-gray-600">Todos los canales en una sola interfaz</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Filtros avanzados</h4>
+                    <p class="text-gray-600">Encuentra conversaciones rápidamente</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Etiquetas personalizadas</h4>
+                    <p class="text-gray-600">Organiza chats según tus necesidades</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Búsqueda inteligente</h4>
+                    <p class="text-gray-600">Localiza mensajes por contenido o cliente</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-yellow-50 border-l-4 border-yellow-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Organización perfecta</h4>
+                <p class="text-gray-700">
+                  Mantén el control total de todas tus conversaciones con herramientas de organización que se adaptan a tu flujo de trabajo.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-yellow-600 text-yellow-600 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Reportes y analíticas -->
+          <div id="reportes" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Reportes y Analíticas</h2>
+                <p class="text-gray-600">Toma decisiones basadas en datos reales</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Accede a métricas detalladas sobre el desempeño de tu equipo, satisfacción del cliente, tiempos de respuesta y mucho más. Exporta reportes personalizados en cualquier momento.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Métricas disponibles:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Tiempo de respuesta</h4>
+                    <p class="text-gray-600">Promedio y por agente</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Volumen de conversaciones</h4>
+                    <p class="text-gray-600">Por canal, hora y día</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Satisfacción del cliente</h4>
+                    <p class="text-gray-600">CSAT y NPS integrados</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Desempeño de agentes</h4>
+                    <p class="text-gray-600">Productividad y calidad</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-red-50 border-l-4 border-red-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Inteligencia de negocio</h4>
+                <p class="text-gray-700">
+                  Identifica tendencias, optimiza procesos y mejora continuamente la experiencia de tus clientes con datos accionables.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-red-600 text-red-600 px-8 py-4 rounded-lg font-semibold hover:bg-red-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Integraciones -->
+          <div id="integraciones" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Integraciones</h2>
+                <p class="text-gray-600">Conecta con tus herramientas favoritas</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Integra BotDialog con tu CRM, ERP, plataforma de e-commerce y más. Sincroniza datos automáticamente y crea flujos de trabajo personalizados.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Integraciones populares:</h3>
+              
+              <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                  <h4 class="font-bold text-gray-900">Salesforce</h4>
+                  <p class="text-sm text-gray-600">CRM líder mundial</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                  <h4 class="font-bold text-gray-900">HubSpot</h4>
+                  <p class="text-sm text-gray-600">Marketing y ventas</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                  <h4 class="font-bold text-gray-900">Shopify</h4>
+                  <p class="text-sm text-gray-600">E-commerce</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                  <h4 class="font-bold text-gray-900">Zapier</h4>
+                  <p class="text-sm text-gray-600">Automatización</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                  <h4 class="font-bold text-gray-900">Google Sheets</h4>
+                  <p class="text-sm text-gray-600">Hojas de cálculo</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                  <h4 class="font-bold text-gray-900">Webhooks</h4>
+                  <p class="text-sm text-gray-600">API personalizada</p>
+                </div>
+              </div>
+
+              <div class="bg-teal-50 border-l-4 border-teal-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Ecosistema conectado</h4>
+                <p class="text-gray-700">
+                  Crea un flujo de trabajo sin fricciones entre todas tus herramientas empresariales y BotDialog.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-teal-600 text-teal-600 px-8 py-4 rounded-lg font-semibold hover:bg-teal-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Web chat widget -->
+          <div id="webchat" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Web Chat Widget</h2>
+                <p class="text-gray-600">Chat en vivo para tu sitio web</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Agrega un widget de chat personalizable a tu sitio web. Permite que tus visitantes inicien conversaciones sin salir de tu página.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Características:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Personalización total</h4>
+                    <p class="text-gray-600">Colores, textos y posición</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Instalación simple</h4>
+                    <p class="text-gray-600">Un código, listo en minutos</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Responsive</h4>
+                    <p class="text-gray-600">Funciona en móvil y desktop</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Mensajes proactivos</h4>
+                    <p class="text-gray-600">Inicia conversaciones automáticamente</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-orange-50 border-l-4 border-orange-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Convierte más visitantes</h4>
+                <p class="text-gray-700">
+                  Captura leads, resuelve dudas y cierra ventas directamente desde tu sitio web con nuestro widget de chat.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-orange-600 text-orange-600 px-8 py-4 rounded-lg font-semibold hover:bg-orange-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Respuestas predefinidas -->
+          <div id="respuestas" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-lime-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">Respuestas Predefinidas</h2>
+                <p class="text-gray-600">Responde más rápido con plantillas</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Crea una biblioteca de respuestas predefinidas para preguntas frecuentes. Tu equipo podrá responder en segundos con mensajes consistentes y profesionales.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Funcionalidades:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-lime-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Atajos de teclado</h4>
+                    <p class="text-gray-600">Inserta respuestas con comandos</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-lime-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Variables dinámicas</h4>
+                    <p class="text-gray-600">Personaliza con nombre del cliente</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-lime-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Categorización</h4>
+                    <p class="text-gray-600">Organiza por temas</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-lime-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Compartir con equipo</h4>
+                    <p class="text-gray-600">Biblioteca centralizada</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-lime-50 border-l-4 border-lime-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Eficiencia máxima</h4>
+                <p class="text-gray-700">
+                  Reduce el tiempo de respuesta hasta un 60% y asegura mensajes consistentes en todo tu equipo.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-lime-600 text-lime-600 px-8 py-4 rounded-lg font-semibold hover:bg-lime-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+          <!-- CSAT y encuestas -->
+          <div id="csat" class="content-section bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mr-4">
+                <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900">CSAT y Encuestas</h2>
+                <p class="text-gray-600">Mide la satisfacción de tus clientes</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Envía encuestas de satisfacción automáticas al finalizar cada conversación. Recopila feedback valioso y mejora continuamente tu servicio.
+              </p>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Características:</h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-pink-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">CSAT automático</h4>
+                    <p class="text-gray-600">Encuestas al cerrar conversaciones</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-pink-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">NPS integrado</h4>
+                    <p class="text-gray-600">Net Promoter Score</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-pink-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Preguntas personalizadas</h4>
+                    <p class="text-gray-600">Crea tus propias encuestas</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-pink-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Análisis de resultados</h4>
+                    <p class="text-gray-600">Reportes detallados</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-pink-50 border-l-4 border-pink-600 p-6 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Mejora continua</h4>
+                <p class="text-gray-700">
+                  Identifica áreas de oportunidad, reconoce a tu mejor equipo y toma decisiones basadas en la voz de tus clientes.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+              <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
+                Ver planes
+              </a>
+              <a href="#demo" class="inline-block bg-white border-2 border-pink-600 text-pink-600 px-8 py-4 rounded-lg font-semibold hover:bg-pink-50 transition">
+                Solicitar demo
+              </a>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid md:grid-cols-5 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <img src="images/BotDialog.png" alt="BotDialog" class="h-10 mb-4">
+          <p class="text-gray-400 leading-relaxed">
+            Chatbots inteligentes para optimizar tu atención al cliente. Centraliza todos tus canales en un solo lugar.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Enlaces</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-white transition">Inicio</a></li>
+            <li><a href="soluciones.html" class="hover:text-white transition">Soluciones</a></li>
+            <li><a href="precios.html" class="hover:text-white transition">Precios</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">Términos</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacidad</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Empresa</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">Blog</a></li>
+            <li><a href="#" class="hover:text-white transition">Nosotros</a></li>
+            <li><a href="#" class="hover:text-white transition">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0">
+          © 2025 BotDialog. Todos los derechos reservados.
+        </p>
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.421.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0h.003zM8.153 20.752h-3.553V9.183h3.553v11.569zm-1.776-13.11c-1.138 0-2.063-.926-2.063-2.065 0-1.138.925-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.924 2.065-2.064 2.065zm12.168 13.11h-3.553V15.5c0-1.73-.037-3.981-2.425-3.981-2.415 0-2.78 1.887-2.78 3.861v7.418h-3.553V9.183h3.413c.01.174.02.347.033.522.006.17.01.34.014.513h.003c.462-1.022 1.76-1.852 3.628-1.852 3.571 0 4.367 2.42 4.367 5.407v6.538z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Widget chat -->
+  <script>
+    (function(d,t) {
+      var BASE_URL="https://app.helpia.com.co";
+      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=BASE_URL+"/packs/js/sdk.js";
+      g.defer = true;
+      g.async = true;
+      s.parentNode.insertBefore(g,s);
+      g.onload=function(){
+        window.chatwootSDK.run({
+          websiteToken: 'RD8pCCv4VFpBQNv3qmUzYf5f',
+          baseUrl: BASE_URL
+        })
+      }
+    })(document,"script");
+  </script>
+
+  <script>
+    var navMenuDiv = document.getElementById("nav-content");
+    var navMenu = document.getElementById("nav-toggle");
+
+    navMenu.addEventListener('click', function() {
+      navMenuDiv.classList.toggle('hidden');
+    });
+
+    var header = document.getElementById("header");
+    
+    function updateHeaderScroll() {
+      var scrollpos = window.scrollY;
+      
+      if (scrollpos > 50) {
+        header.classList.add("header-scrolled");
+      } else {
+        header.classList.remove("header-scrolled");
+      }
+    }
+
+    updateHeaderScroll();
+
+    document.addEventListener("scroll", updateHeaderScroll);
+
+    function showContent(sectionId) {
+      const allSections = document.querySelectorAll('.content-section');
+      allSections.forEach(section => {
+        section.classList.remove('active');
+      });
+
+      const allSidebarItems = document.querySelectorAll('.sidebar-item');
+      allSidebarItems.forEach(item => {
+        item.classList.remove('active');
+      });
+
+      const selectedSection = document.getElementById(sectionId);
+      if (selectedSection) {
+        selectedSection.classList.add('active');
+      }
+
+      const clickedItem = document.querySelector(`[data-section="${sectionId}"]`);
+      if (clickedItem) {
+        clickedItem.classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

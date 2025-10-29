@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BotDialog - El chat centralizado para tu empresa</title>
+  <meta name="description" content="Centraliza todos tus canales de mensajería en un único chat. Más rápido, más fácil, más organizado.">
+  <link rel="icon" type="image/png" href="images/BotDialog.png">
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient {
+      background: linear-gradient(90deg, #2d7d46 0%, #2360a5 100%);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    #header {
+      transition: all 0.3s ease-in-out;
+    }
+    .header-scrolled {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border-bottom: 3px solid;
+      border-image: linear-gradient(90deg, #2d7d46 0%, #2360a5 100%) 1;
+    }
+    /* En móvil, el header siempre tiene fondo blanco para mejor visibilidad */
+    @media (max-width: 1023px) {
+      #header {
+        background: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #2d7d46 0%, #2360a5 100%) 1;
+      }
+      #nav-toggle {
+        color: #1f2937 !important;
+      }
+      #header .toggleColour {
+        color: #1f2937 !important;
+      }
+      #navAction {
+        background: linear-gradient(90deg, #2d7d46 0%, #2360a5 100%) !important;
+        color: white !important;
+      }
+    }
+    @media (min-width: 1024px) {
+      #nav-content {
+        background: transparent !important;
+      }
+    }
+    @media (max-width: 1023px) {
+      #nav-content:not(.hidden) {
+        background: white;
+      }
+    }
+  </style>
+</head>
+<body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Inter', sans-serif;">
+  
+  <!-- Header  -->
+  <nav id="header" class="fixed w-full z-50 top-0 text-white gradient">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+      <div class="pl-4 flex items-center">
+        <a href="#" class="flex items-center space-x-2">
+          <img src="images/BotDialog.png" alt="BotDialog" class="h-11 w-auto">
+        </a>
+      </div>
+
+      <div class="block lg:hidden pr-4">
+        <button id="nav-toggle" class="flex items-center p-1 text-white hover:text-gray-200 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+          <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      
+      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 p-4 lg:p-0" id="nav-content">
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="mr-3">
+            <a class="toggleColour inline-block text-white font-semibold hover:text-green-600 py-2 px-4" href="soluciones.html">Soluciones</a>
+          </li>
+          <li class="mr-3">
+            <a class="toggleColour inline-block text-white font-semibold hover:text-green-600 py-2 px-4" href="precios.html">Precios</a>
+          </li>
+        </ul>
+        <a
+          href="precios.html"
+          id="navAction"
+          class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow hover:shadow-xl transform transition hover:scale-105"
+        >
+          Empieza hoy mismo!
+        </a>
+      </div>
+    </div>
+    <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+  </nav>
+
+  <!-- Panel principal -->
+  <div class="pt-24 relative z-10">
+    <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center relative z-10">
+      <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left relative z-10">
+        <p class="uppercase tracking-loose w-full">ATENCIÓN INTELIGENTE</p>
+        <h1 class="my-4 text-5xl font-bold leading-tight">
+          BotDialog: el chat centralizado para tu empresa
+        </h1>
+        <p class="leading-normal text-2xl mb-8">
+          Atiende todos tus mensajes desde un solo lugar. Más rápido, más fácil, más organizado.
+        </p>
+
+        <div class="w-full flex justify-center md:justify-start">
+          <a href="precios.html"
+            class="hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out inline-block">
+            Conoce nuestros planes
+          </a>
+        </div>
+      </div>
+
+      <div class="w-full md:w-3/5 py-6 flex justify-center items-center relative z-0">
+        <img class="w-3/4 md:w-4/5 max-w-md" src="images/chat.svg" alt="Ilustración hero" />
+      </div>
+    </div>
+  </div>
+
+  <div class="relative -mt-12 lg:-mt-24">
+    <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-2.000000, 44.000000)" fill="#FFFFFF" fill-rule="nonzero">
+          <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496" opacity="0.100000001"></path>
+          <path
+            d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z"
+            opacity="0.100000001"
+          ></path>
+          <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z" id="Path-4" opacity="0.200000003"></path>
+        </g>
+        <g transform="translate(-4.000000, 76.000000)" fill="#FFFFFF" fill-rule="nonzero">
+          <path
+            d="M0.457,34.035 C57.086,53.198 98.208,65.809 123.822,71.865 C181.454,85.495 234.295,90.29 272.033,93.459 C311.355,96.759 396.635,95.801 461.025,91.663 C486.76,90.01 518.727,86.372 556.926,80.752 C595.747,74.596 622.372,70.008 636.799,66.991 C663.913,61.324 712.501,49.503 727.605,46.128 C780.47,34.317 818.839,22.532 856.324,15.904 C922.689,4.169 955.676,2.522 1011.185,0.432 C1060.705,1.477 1097.39,3.129 1121.236,5.387 C1161.703,9.219 1208.621,17.821 1235.4,22.304 C1285.855,30.748 1354.351,47.432 1440.886,72.354 L1441.191,104.352 L1.121,104.031 L0.457,34.035 Z"
+          ></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Sub panel principal -->
+  <section id="caracteristicas" class="py-20 px-6 bg-white">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Tu canal único de atención al cliente
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-green-600 to-blue-600 mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+        <div>
+          <div class="flex items-start space-x-4 mb-6">
+            <div class="flex-shrink-0">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">Atención al cliente sin complicaciones</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Con BotDialog conecta todos tus canales de mensajería en un único chat, fácil de usar y diseñado para empresas que quieren crecer sin complicaciones.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img src="images/informes.png" alt="Panel de conversaciones" class="rounded-2xl shadow-2xl">
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1">
+          <img src="images/chatwoot-panel.png" alt="Interfaz BotDialog" class="rounded-2xl shadow-2xl">
+        </div>
+        <div class="order-1 md:order-2">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Gestiona todas tus conversaciones en un solo lugar
+          </h2>
+          <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+            BotDialog centraliza todos los canales de comunicación de tu empresa en una interfaz intuitiva y fácil de usar.
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">Bandeja de entrada unificada</h4>
+                <p class="text-gray-600">Visualiza y responde mensajes de WhatsApp, Facebook, Instagram y más desde un solo panel.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">Organización inteligente</h4>
+                <p class="text-gray-600">Etiquetas, bandejas personalizadas y filtros para mantener todo ordenado y accesible.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">Colaboración en equipo</h4>
+                <p class="text-gray-600">Asigna conversaciones, menciona compañeros y trabaja en conjunto sin complicaciones.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">Respuestas rápidas y automatizadas</h4>
+                <p class="text-gray-600">Crea plantillas y configura respuestas automáticas para atender más rápido.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <a href="#contacto" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-xl transition transform hover:scale-105">
+              Solicitar Demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="py-20 px-6 bg-gray-50">
+    <div class="container mx-auto max-w-7xl">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Servicios que Ofrecemos
+        </h2>
+        <p class="text-xl text-gray-600">
+          Soluciones completas para la comunicación de tu empresa
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-600 to-green-400 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Chat Multicanal</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Centraliza WhatsApp, Facebook, Instagram, email y más en una sola plataforma. Responde desde un único lugar.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+          <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 00-5.356-1.857M7 20h-2c0-.656-.126-1.283-.356-1.857M7 20H7m10 0v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Chatbots Inteligentes</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Automatiza respuestas frecuentes y atiende a tus clientes 24/7. Configura flujos personalizados para tu negocio.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+          <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-400 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Gestión de Equipos</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Asigna conversaciones, monitorea el desempeño y colabora en tiempo real con tu equipo de soporte.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+          <div class="w-16 h-16 bg-gradient-to-br from-yellow-600 to-yellow-400 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18M7 13h2v5H7zm4-8h2v13h-2zm4 5h2v8h-2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Reportes y Analíticas</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Obtén métricas detalladas sobre tiempos de respuesta, satisfacción del cliente y rendimiento del equipo.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+          <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-400 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M11.983 13.983A2 2 0 1114 12a2 2 0 01-2.017 1.983zm7.016-2.266a6.957 6.957 0 00.001-1.434l1.49-1.16a.5.5 0 00.12-.637l-1.41-2.44a.5.5 0 00-.607-.22l-1.757.7a6.992 6.992 0 00-1.243-.722l-.267-1.865a.5.5 0 00-.497-.43h-2.82a.5.5 0 00-.497.43l-.267 1.865a6.992 6.992 0 00-1.243.722l-1.757-.7a.5.5 0 00-.607-.22l-1.41 2.44a.5.5 0 00.12.637l1.49 1.16a6.957 6.957 0 000 1.434l-1.49 1.16a.5.5 0 00-.12.637l1.41 2.44a.5.5 0 00.607.22l1.757-.7a6.992 6.992 0 001.243.722l.267 1.865a.5.5 0 00.497.43h2.82a.5.5 0 00.497-.43l.267-1.865a6.992 6.992 0 001.243-.722l1.757.7a.5.5 0 00.607-.22l1.41-2.44a.5.5 0 00-.12-.637l-1.49-1.16z" />
+              </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Configuración Personalizada</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Adaptamos la plataforma a las necesidades específicas de tu empresa con integraciones y personalizaciones.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+          <div class="w-16 h-16 bg-gradient-to-br from-pink-600 to-pink-400 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 1a9 9 0 00-9 9v5a3 3 0 003 3h1v-7H5a7 7 0 0114 0h-2v7h1a3 3 0 003-3v-5a9 9 0 00-9-9zm-2 18h4v2h-4z" />
+            </svg>      
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Capacitación y Soporte</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Entrenamos a tu equipo y brindamos soporte técnico continuo para garantizar el éxito de tu implementación.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planes -->
+  <section id="precios" class="bg-gray-50 py-16">
+    <div class="container mx-auto px-6 lg:px-20">
+      <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">Planes BotDialog</h2>
+      <p class="text-center text-gray-600 mb-12">Conoce nuestros planes y elige el ideal para tu equipo</p>
+      
+      <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch">
+        
+        <!-- Plan basico -->
+        <div class="bg-white rounded-xl shadow-lg p-8 flex-1 max-w-sm border-2 border-gray-200 hover:shadow-2xl transition">
+          <h3 class="text-2xl font-bold text-center text-gray-800 mb-2">Plan Básico</h3>
+          <p class="text-center text-sm text-gray-500 mb-4">Facturación Anual</p>
+          <div class="text-center mb-6">
+            <span class="text-5xl font-bold text-green-700">$30</span>
+            <span class="text-gray-600">/mes</span>
+            <p class="text-sm text-gray-500 mt-1">$360 al año (pago único)</p>
+          </div>
+          <ul class="mb-8 text-gray-700 space-y-3">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>3 usuarios</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>1 línea WhatsApp</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>250 conversaciones/mes</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Widget de chat personalizado</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Capacitación y soporte</span>
+            </li>
+          </ul>
+          <a href="precios.html" class="block bg-gray-900 hover:bg-gray-800 text-white text-center font-bold py-3 px-6 rounded-lg transition">
+            Ver detalles
+          </a>
+        </div>
+
+        <!-- Plan premium -->
+        <div class="bg-white rounded-xl shadow-2xl p-8 flex-1 max-w-sm border-4 border-green-600 relative transform md:scale-105 hover:shadow-3xl transition">
+          <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-gray-900 text-xs font-bold px-4 py-1 rounded-full shadow-md uppercase">
+            Más Popular
+          </span>
+          <h3 class="text-2xl font-bold text-center text-gray-800 mb-2">Plan Premium</h3>
+          <p class="text-center text-sm text-gray-500 mb-4">Facturación Anual</p>
+          <div class="text-center mb-6">
+            <span class="text-5xl font-bold text-green-700">$80</span>
+            <span class="text-gray-600">/mes</span>
+            <p class="text-sm text-gray-500 mt-1">$960 al año (pago único)</p>
+          </div>
+          <ul class="mb-8 text-gray-700 space-y-3">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>10 usuarios</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>1 línea WhatsApp Business</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>1000 conversaciones/mes</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Chatbots automatizados</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Reportes avanzados</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Soporte prioritario</span>
+            </li>
+          </ul>
+          <a href="precios.html" class="block bg-green-600 hover:bg-green-700 text-white text-center font-bold py-3 px-6 rounded-lg transition">
+            Ver detalles
+          </a>
+        </div>
+
+        <!-- Plan personalizado -->
+        <div class="bg-white rounded-xl shadow-lg p-8 flex-1 max-w-sm border-2 border-gray-200 hover:shadow-2xl transition">
+          <h3 class="text-2xl font-bold text-center text-gray-800 mb-2">Plan Personalizado</h3>
+          <p class="text-center text-sm text-gray-500 mb-4">Facturación Anual</p>
+          <div class="text-center mb-6">
+            <span class="text-3xl font-bold text-green-700">A tu medida</span>
+            <p class="text-sm text-gray-600 mt-3">Diseñado para empresas que requieren mayor flexibilidad</p>
+          </div>
+          <ul class="mb-8 text-gray-700 space-y-3">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Usuarios ilimitados</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Múltiples líneas WhatsApp</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Conversaciones ilimitadas</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Integraciones avanzadas</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Soporte dedicado 24/7</span>
+            </li>
+          </ul>
+          <a href="precios.html" class="block bg-gray-900 hover:bg-gray-800 text-white text-center font-bold py-3 px-6 rounded-lg transition">
+            Solicitar cotización
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="precios.html" class="inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-xl transition transform hover:scale-105">
+          Ver comparación completa de planes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sub footer -->
+  <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-1.000000, -14.000000)" fill-rule="nonzero">
+        <g class="wave" fill="#f8fafc">
+          <path
+            d="M1440,84 C1383.555,64.3 1342.555,51.3 1317,45 C1259.5,30.824 1206.707,25.526 1169,22 C1129.711,18.326 1044.426,18.475 980,22 C954.25,23.409 922.25,26.742 884,32 C845.122,37.787 818.455,42.121 804,45 C776.833,50.41 728.136,61.77 713,65 C660.023,76.309 621.544,87.729 584,94 C517.525,105.104 484.525,106.438 429,108 C379.49,106.484 342.823,104.484 319,102 C278.571,97.783 231.737,88.736 205,84 C154.629,75.076 86.296,57.743 0,32 L0,0 L1440,0 L1440,84 Z"
+          ></path>
+        </g>
+        <g transform="translate(1.000000, 15.000000)" fill="#FFFFFF">
+          <g transform="translate(719.500000, 68.500000) rotate(-180.000000) translate(-719.500000, -68.500000) ">
+            <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496" opacity="0.100000001"></path>
+            <path
+              d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z"
+              opacity="0.100000001"
+            ></path>
+            <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z" opacity="0.200000003"></path>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+  
+  <section class="container mx-auto text-center py-6 mb-12">
+    <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
+      Automatiza tu soporte con BotDialog
+    </h2>
+    <div class="w-full mb-4">
+      <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
+    </div>
+    <h3 class="my-4 text-3xl leading-tight">
+      Ahorra tiempo, optimiza tus recursos y atiende más clientes con menos esfuerzo.
+    </h3>
+    <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+      Agendar Demo
+    </button>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid md:grid-cols-5 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <img src="images/BotDialog.png" alt="BotDialog" class="h-10 mb-4">
+          <p class="text-gray-400 leading-relaxed">
+            Chatbots inteligentes para optimizar tu atención al cliente. Centraliza todos tus canales en un solo lugar.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Enlaces</h4>
+          <ul class="space-y-2">
+            <li><a href="#caracteristicas" class="hover:text-white transition">Características</a></li>
+            <li><a href="#servicios" class="hover:text-white transition">Servicios</a></li>
+            <li><a href="#precios" class="hover:text-white transition">Precios</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">Términos</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacidad</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Empresa</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">Blog</a></li>
+            <li><a href="#" class="hover:text-white transition">Nosotros</a></li>
+            <li><a href="#" class="hover:text-white transition">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0">
+          © 2025 BotDialog. Todos los derechos reservados.
+        </p>
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.766-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.6045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Widget chat -->
+  <script>
+    (function(d,t) {
+      var BASE_URL="https://app.helpia.com.co";
+      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=BASE_URL+"/packs/js/sdk.js";
+      g.defer = true;
+      g.async = true;
+      s.parentNode.insertBefore(g,s);
+      g.onload=function(){
+        window.chatwootSDK.run({
+          websiteToken: 'RD8pCCv4VFpBQNv3qmUzYf5f',
+          baseUrl: BASE_URL
+        })
+      }
+    })(document,"script");
+  </script>
+    
+  <script>
+    var scrollpos = window.scrollY;
+    var header = document.getElementById("header");
+    var navcontent = document.getElementById("nav-content");
+    var navaction = document.getElementById("navAction");
+    var toToggle = document.querySelectorAll(".toggleColour");
+
+    function updateHeader() {
+      scrollpos = window.scrollY;
+
+      if (scrollpos > 50) {
+        header.classList.add("header-scrolled");
+        header.classList.remove("gradient");
+        navaction.classList.remove("bg-white");
+        navaction.classList.add("gradient");
+        navaction.classList.remove("text-gray-800");
+        navaction.classList.add("text-white");
+        for (var i = 0; i < toToggle.length; i++) {
+          toToggle[i].classList.add("text-gray-800");
+          toToggle[i].classList.remove("text-white");
+          toToggle[i].classList.add("font-semibold");
+        }
+      } else {
+        header.classList.remove("header-scrolled");
+        header.classList.add("gradient");
+        navaction.classList.remove("gradient");
+        navaction.classList.add("bg-white");
+        navaction.classList.remove("text-white");
+        navaction.classList.add("text-gray-800");
+        for (var i = 0; i < toToggle.length; i++) {
+          toToggle[i].classList.add("text-white");
+          toToggle[i].classList.remove("text-gray-800");
+          toToggle[i].classList.add("font-semibold");
+        }
+      }
+    }
+
+    document.addEventListener("scroll", updateHeader);
+    
+    var navMenuDiv = document.getElementById("nav-content");
+    var navMenu = document.getElementById("nav-toggle");
+
+    document.onclick = check;
+    function check(e) {
+      var target = (e && e.target) || (event && event.srcElement);
+
+      if (!checkParent(target, navMenuDiv)) {
+        if (checkParent(target, navMenu)) {
+          if (navMenuDiv.classList.contains("hidden")) {
+            navMenuDiv.classList.remove("hidden");
+          } else {
+            navMenuDiv.classList.add("hidden");
+          }
+        } else {
+          navMenuDiv.classList.add("hidden");
+        }
+      }
+    }
+    function checkParent(t, elm) {
+      while (t.parentNode) {
+        if (t == elm) {
+          return true;
+        }
+        t = t.parentNode;
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
